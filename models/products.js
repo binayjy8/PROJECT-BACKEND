@@ -14,4 +14,4 @@ const products = mongoose.Schema({
     }
 });
 
-const Products = mongoose.model("Products", products)
+const Products = mongoose.model("Products", products);
