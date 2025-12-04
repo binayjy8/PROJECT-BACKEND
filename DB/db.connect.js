@@ -4,5 +4,5 @@ require("dotenv").config();
 const initializeDatabase = async () => {
     await mongoose.connect().then(() => {
         console.log("connected to DB");
-    }).catch((error) => "Error")
+    }).catch((error) => "Error connecting")
 }
