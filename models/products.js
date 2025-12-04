@@ -13,3 +13,5 @@ const products = mongoose.Schema({
         type: String,
     }
 });
+
+const Products = mongoose.model("Products", products)
