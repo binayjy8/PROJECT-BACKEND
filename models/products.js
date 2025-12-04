@@ -12,4 +12,4 @@ const products = mongoose.Schema({
     imageUrl: {
         type: String,
     }
-})
+});
