@@ -40,5 +40,16 @@ const cartItem = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-    }
+    },
+    email: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
+    address: [addressSchema],
+    wishlist: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "Product"
+    }],
+    cart: [cartItemSchema],
 });
