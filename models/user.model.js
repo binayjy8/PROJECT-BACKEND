@@ -36,3 +36,5 @@ const cartItem = new mongoose.Schema({
         type: Number, default: 1,
     },
 });
+
+const userSchema = new mongoose.Schema({});
