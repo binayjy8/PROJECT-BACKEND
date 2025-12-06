@@ -37,4 +37,8 @@ const cartItem = new mongoose.Schema({
     },
 });
 
-const userSchema = new mongoose.Schema({});
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+    }
+});
