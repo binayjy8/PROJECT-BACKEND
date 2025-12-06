@@ -27,3 +27,12 @@ const addressSchema = new mongoose.Schema({
         default: false,
     },
 });
+
+const cartItem = new mongoose.Schema({
+    product: {
+        type: mongoose.Schema.Types.ObjectId, ref: "Product",
+    },
+    qty: {
+        type: Number, default: 1,
+    },
+});
