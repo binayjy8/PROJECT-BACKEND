@@ -2,8 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const products = mongoose.Schema({
-    title: {
+    name: {
         type: String,
+        required: true,
     },
     price: {
         type: Number,
