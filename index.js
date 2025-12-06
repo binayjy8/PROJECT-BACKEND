@@ -4,6 +4,7 @@ const PORT = process.env.PORT;
 require("dotenv").config();
 const cors = require("cors");
 const { initializeDatabase } = require("./DB/db.connect.js");
+const Products = require("./models/products.js");
 
 const corsOptions = {
     origin: "*",
