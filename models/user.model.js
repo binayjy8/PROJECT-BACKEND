@@ -22,4 +22,8 @@ const addressSchema = new mongoose.Schema({
     phone: {
         type: String,
     },
+    isDefault: {
+        type: Boolean,
+        default: false,
+    },
 });
