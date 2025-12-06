@@ -15,6 +15,10 @@ app.use(express.json());
 
 initializeDatabase();
 
+app.get("/", (req, res) => {
+    res.send("working");
+});
+
 app.listen(PORT, ()=> {
     console.log("Listening to the port", PORT);
 });
