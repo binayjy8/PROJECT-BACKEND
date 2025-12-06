@@ -16,4 +16,10 @@ const addressSchema = new mongoose.Schema({
     zip: {
         type: String,
     },
+    country: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
 });
