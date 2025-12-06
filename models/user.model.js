@@ -30,7 +30,7 @@ const addressSchema = new mongoose.Schema({
 
 const cartItem = new mongoose.Schema({
     product: {
-        type: mongoose.Schema.Types.ObjectId, ref: "Product",
+        type: mongoose.Schema.Types.ObjectId, ref: "Products",
     },
     qty: {
         type: Number, default: 1,
@@ -49,9 +49,9 @@ const userSchema = new mongoose.Schema({
     },
     address: [addressSchema],
     wishlist: [{
-        type: mongoose.Schema.Types.ObjectId, ref: "Product"
+        type: mongoose.Schema.Types.ObjectId, ref: "Products"
     }],
-    cart: [cartItemSchema],
+    cart: [cartItem],
 });
 
 module.exports = mongoose.model("User", userSchema);
