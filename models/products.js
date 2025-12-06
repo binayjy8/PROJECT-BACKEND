@@ -15,7 +15,10 @@ const products = mongoose.Schema({
     },
     imageUrl: {
         type: String,
-    }
+    },
+    category: {
+        type: mongoose.Schema.Types.ObjectId, ref: "Category"
+    },
 });
 
 const Products = mongoose.model("Products", products);
