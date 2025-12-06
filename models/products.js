@@ -22,7 +22,14 @@ const products = mongoose.Schema({
     rating: {
         type: Number,
         default: 0,
-    }
+    },
+    inStock: {
+        type: Boolean, default: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const Products = mongoose.model("Products", products);
