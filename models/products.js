@@ -19,6 +19,10 @@ const products = mongoose.Schema({
     category: {
         type: mongoose.Schema.Types.ObjectId, ref: "Category"
     },
+    rating: {
+        type: Number,
+        default: 0,
+    }
 });
 
 const Products = mongoose.model("Products", products);
