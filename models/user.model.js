@@ -4,4 +4,7 @@ const addressSchema = new mongoose.Schema({
     name: {
         type: String,
     },
+    street: {
+        type: String,
+    },
 });
