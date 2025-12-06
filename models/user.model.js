@@ -53,3 +53,5 @@ const userSchema = new mongoose.Schema({
     }],
     cart: [cartItemSchema],
 });
+
+module.exports = mongoose.model("User", userSchema);
