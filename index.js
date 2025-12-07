@@ -16,6 +16,9 @@ app.use(express.json());
 
 initializeDatabase();
 
+product.save().then(() => console.log("Product saved"));
+
+
 app.get("/", (req, res) => {
     res.send("working");
 });
