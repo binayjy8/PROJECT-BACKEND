@@ -28,7 +28,7 @@ async function findAllData(){
 app.get("/data", async (req, res) => {
    try{
     const data = await findAllData();
-    if(data){
+    if(data && data.length > 0){
         res.json(data);
     } else {
         res.status(404).json({ error: "Products not found"});
