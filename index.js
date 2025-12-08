@@ -42,7 +42,7 @@ async function updateData() {
     try{
 
     }catch(error){
-        console.log("Error in updating da");
+        console.log("Error in updating dat");
     }
 }
 
