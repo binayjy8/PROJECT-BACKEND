@@ -47,6 +47,14 @@ async function updateData(productId, updatedData) {
     }
 }
 
+app.post("/data/:dataId", (req, res) => {
+    try{
+
+    }catch(error){
+        res.status(500).json({error: "Failed to update product"});
+    }
+});
+
 app.listen(PORT, ()=> {
     console.log("Listening to the port", PORT);
 });
