@@ -40,7 +40,7 @@ app.get("/data", async (req, res) => {
 
 async function updateData(productId, updatedData) {
     try{
-
+        const updatedProduct = await Products.findByIdAndUpdate(productId, updateData, {new: true,})
     }catch(error){
         console.log("Error in updating data");
     }
