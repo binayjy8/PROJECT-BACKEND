@@ -38,7 +38,7 @@ app.get("/data", async (req, res) => {
    }
 });
 
-async function updateData() {
+async function updateData(productId, updatedData) {
     try{
 
     }catch(error){
