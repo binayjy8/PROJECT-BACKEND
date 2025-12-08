@@ -38,6 +38,14 @@ app.get("/data", async (req, res) => {
    }
 });
 
+async function updateData() {
+    try{
+
+    }catch(error){
+        console.log("");
+    }
+}
+
 app.listen(PORT, ()=> {
     console.log("Listening to the port", PORT);
 });
