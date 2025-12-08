@@ -16,11 +16,26 @@ app.use(express.json());
 
 initializeDatabase();
 
-product.save().then(() => console.log("Product saved"));
+async function findAllData(){
+     try{
+        const data = await Products.find({});
+        return data;
+    } catch(error) {
+        throw error;
+    }
+}
 
-
-app.get("/", (req, res) => {
-    res.send("working");
+app.get("/data", async (req, res) => {
+   try{
+    const data = await findAllData();
+    if(data){
+        res.json(data);
+    } else {
+        res.status(404).json({ error: "Products not found"});
+    }
+   } catch(error) {
+    res.status(500).json({message: "Failed to fetch product"});
+   }
 });
 
 app.listen(PORT, ()=> {
