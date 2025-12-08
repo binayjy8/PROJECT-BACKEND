@@ -47,9 +47,14 @@ async function updateData(productId, updatedData) {
     }
 }
 
-app.post("/data/:dataId", (req, res) => {
+app.post("/data/:dataId", async (req, res) => {
     try{
-
+        const updatedProduct = await updateData(req.params.dataId, req.body);
+        if(updatedProduct){
+            res.status(200).json({message: "Updated successfully"});
+        } else {
+            res.status(404).json({error: "Product not found"});
+        }
     }catch(error){
         res.status(500).json({error: "Failed to update product"});
     }
