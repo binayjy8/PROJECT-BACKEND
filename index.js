@@ -42,7 +42,7 @@ async function updateData() {
     try{
 
     }catch(error){
-        console.log("Er");
+        console.log("Err");
     }
 }
 
