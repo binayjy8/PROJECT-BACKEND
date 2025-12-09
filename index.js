@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const { initializeDatabase } = require("./DB/db.connect.js");
 const Products = require("./models/products.js");
+const Category = require("./models/category.js");
 
 const corsOptions = {
     origin: "*",
@@ -16,18 +17,72 @@ app.use(express.json());
 
 initializeDatabase();
 
-async function findAllData(){
-     try{
-        const data = await Products.find({});
-        return data;
-    } catch(error) {
-        throw error;
-    }
-}
+// ========== PRODUCTS ROUTES ==========
 
+// GET all products
+app.get("/api/products", async (req, res) => {
+   try{
+    const products = await Products.find({}).populate('category');
+    if(products && products.length > 0){
+        res.json({ data: { products } });
+    } else {
+        res.status(404).json({ error: "Products not found"});
+    }
+   } catch(error) {
+    res.status(500).json({message: "Failed to fetch products"});
+   }
+});
+
+// GET product by ID
+app.get("/api/products/:productId", async (req, res) => {
+    try{
+        const product = await Products.findById(req.params.productId).populate('category');
+        if(product){
+            res.json({ data: { product } });
+        } else {
+            res.status(404).json({ error: "Product not found"});
+        }
+    } catch(error) {
+        res.status(500).json({message: "Failed to fetch product"});
+    }
+});
+
+// ========== CATEGORIES ROUTES ==========
+
+// GET all categories
+app.get("/api/categories", async (req, res) => {
+    try{
+        const categories = await Category.find({});
+        if(categories && categories.length > 0){
+            res.json({ data: { categories } });
+        } else {
+            res.status(404).json({ error: "Categories not found"});
+        }
+    } catch(error) {
+        res.status(500).json({message: "Failed to fetch categories"});
+    }
+});
+
+// GET category by ID
+app.get("/api/categories/:categoryId", async (req, res) => {
+    try{
+        const category = await Category.findById(req.params.categoryId);
+        if(category){
+            res.json({ data: { category } });
+        } else {
+            res.status(404).json({ error: "Category not found"});
+        }
+    } catch(error) {
+        res.status(500).json({message: "Failed to fetch category"});
+    }
+});
+
+// ========== OLD ROUTES (Keep for compatibility) ==========
+
+// GET all products (old route)
 app.get("/data", async (req, res) => {
    try{
-    const data = await findAllData();
+    const data = await Products.find({});
     if(data && data.length > 0){
         res.json(data);
     } else {
@@ -38,20 +93,16 @@ app.get("/data", async (req, res) => {
    }
 });
 
-async function updateData(productId, updatedData) {
-    try{
-        const updatedProduct = await Products.findByIdAndUpdate(productId, updatedData, {new: true,});
-        return updatedProduct;
-    }catch(error){
-        console.log("Error in updating data", error);
-    }
-}
-
+// UPDATE product
 app.post("/data/:dataId", async (req, res) => {
     try{
-        const updatedProduct = await updateData(req.params.dataId, req.body);
+        const updatedProduct = await Products.findByIdAndUpdate(
+            req.params.dataId, 
+            req.body, 
+            {new: true}
+        );
         if(updatedProduct){
-            res.status(200).json({message: "Updated successfully"});
+            res.status(200).json({message: "Updated successfully", data: updatedProduct});
         } else {
             res.status(404).json({error: "Product not found"});
         }
