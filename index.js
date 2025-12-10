@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const { initializeDatabase } = require("./DB/db.connect.js");
 const Products = require("./models/products.js");
-const Category = require("./models/category.js");
+const Category = require("./models/category.model.js");
 
 const corsOptions = {
     origin: "*",
