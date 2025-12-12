@@ -77,40 +77,6 @@ app.get("/api/categories/:categoryId", async (req, res) => {
     }
 });
 
-// ========== OLD ROUTES (Keep for compatibility) ==========
-
-// GET all products (old route)
-app.get("/data", async (req, res) => {
-   try{
-    const data = await Products.find({});
-    if(data && data.length > 0){
-        res.json(data);
-    } else {
-        res.status(404).json({ error: "Products not found"});
-    }
-   } catch(error) {
-    res.status(500).json({message: "Failed to fetch product"});
-   }
-});
-
-// UPDATE product
-app.post("/data/:dataId", async (req, res) => {
-    try{
-        const updatedProduct = await Products.findByIdAndUpdate(
-            req.params.dataId, 
-            req.body, 
-            {new: true}
-        );
-        if(updatedProduct){
-            res.status(200).json({message: "Updated successfully", data: updatedProduct});
-        } else {
-            res.status(404).json({error: "Product not found"});
-        }
-    }catch(error){
-        res.status(500).json({error: "Failed to update product"});
-    }
-});
-
 app.listen(PORT, ()=> {
     console.log("Listening to the port", PORT);
 });
