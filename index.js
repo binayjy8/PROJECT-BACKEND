@@ -114,5 +114,5 @@ app.get("/api/orders/:orderId", async (req, res) => {
 });
 
 app.listen(PORT, ()=> {
-    console.log("Listening to the port whic", PORT);
+    console.log("Listening to the port which", PORT);
 });
