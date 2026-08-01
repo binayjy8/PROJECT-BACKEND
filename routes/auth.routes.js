@@ -44,9 +44,11 @@ router.post("/register", async (req, res) => {
             },
         });
     } catch (error) {
-        console.log("Error during registration:", error);
+        console.error("REGISTER ERROR:", error);
+
         if (error.code === 11000) {
-            return res.status(409).json({ message: "Email already registered" });
+            const duplicateField = Object.keys(error.keyPattern || {})[0] || "field";
+            return res.status(409).json({ message: `${duplicateField} already registered` });
         }
         if (error.name === "ValidationError") {
             const messages = Object.values(error.errors).map((e) => e.message);
