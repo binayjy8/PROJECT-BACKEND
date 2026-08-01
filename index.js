@@ -7,6 +7,7 @@ const { initializeDatabase } = require("./DB/db.connect.js");
 const Products = require("./models/products.js");
 const Category = require("./models/category.model.js");
 const Order = require("./models/order.model.js"); 
+const authRoutes = require("./routes/auth.routes.js");
 
 const corsOptions = {
     origin: "*",
@@ -15,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 
 initializeDatabase();
 
@@ -76,7 +78,7 @@ app.get("/api/categories/:categoryId", async (req, res) => {
     }
 });
 
-// ========== ORDER ROUTES ========== ✅ ADD THESE ROUTES
+
 
 // POST - Create Order
 app.post("/api/orders", async (req, res) => {
