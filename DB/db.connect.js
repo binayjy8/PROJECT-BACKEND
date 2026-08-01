@@ -5,14 +5,23 @@ require("dotenv").config();
 
 const mongouri = process.env.MONGODB;
 
+let isConnected = false;
+
 const initializeDatabase = async () => {
-    await mongoose.connect(mongouri)
-        .then(() => {
-            console.log("Connected to DB");
-        })
-        .catch((error) => {
-            console.log("Error connecting to database:", error);
+    if (isConnected) {
+        return;
+    }
+
+    try {
+        const db = await mongoose.connect(mongouri, {
+            serverSelectionTimeoutMS: 5000,
         });
+        isConnected = db.connections[0].readyState === 1;
+        console.log("Connected to DB");
+    } catch (error) {
+        console.log("Error connecting to database:", error);
+        throw error;
+    }
 };
 
 module.exports = { initializeDatabase };
